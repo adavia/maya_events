@@ -1,6 +1,6 @@
 require "rails_helper"
 
-RSpec.feature "Users can edit existing projects" do
+RSpec.feature "Organizers can edit existing events" do
   before do
     FactoryGirl.create(:event, title: "Pool Party")
 
