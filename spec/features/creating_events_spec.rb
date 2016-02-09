@@ -11,5 +11,11 @@ RSpec.feature "Organizers can create new events" do
     click_button "Create Event"
 
     expect(page).to have_content "Event has been created."
+
+    event = Event.find_by(title: "Pool Party")
+    expect(page.current_url).to eq event_url(event)
+
+    title = "Pool Party - Events - Riviera Events"
+    expect(page).to have_title title
   end
 end
