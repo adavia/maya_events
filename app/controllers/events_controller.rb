@@ -17,7 +17,8 @@ class EventsController < ApplicationController
       flash[:notice] = "Event has been created."
       redirect_to @event
     else
-      # nothing, yet
+      flash.now[:alert] = "Event has not been created."
+      render "new"
     end
   end
 
