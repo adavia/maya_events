@@ -1,7 +1,11 @@
 require "rails_helper"
 
 RSpec.feature "Organizers can create new events" do
+  let(:user) { FactoryGirl.create(:user) }
+
   before do
+    login_as(user)
+    
     visit "/"
     click_link "New Event"
   end

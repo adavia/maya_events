@@ -18,14 +18,11 @@
         <button type="submit" class="btn btn-default btn-sm">Submit</button>
       </form>
       <ul class="nav navbar-nav navbar-right">
-        <li class="<%= "active" if current_page?("/") %>">
-          <%= link_to "Home", root_path %>
-        </li>
         <% unless user_signed_in? %>
-          <li class="<%= "active" if current_page?("/users/sign_up") %>">
+          <li class="<%= active_link new_user_registration_path %>">
             <%= link_to "Sign up", new_user_registration_path %>
           </li>
-          <li class="<%= "active" if current_page?("/users/sign_in") %>">
+          <li class="<%= active_link new_user_session_path %>">
             <%= link_to "Sign in", new_user_session_path %>
           </li>
         <% end %>

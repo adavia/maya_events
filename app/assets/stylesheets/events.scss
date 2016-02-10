@@ -3,7 +3,13 @@
 // You can use Sass (SCSS) here: http://sass-lang.com/
 
 #events h2 {
-  font-size: 16px;
+  font-size: 20px;
   font-weight: bold;
   margin: 20px 0px 0px;
+}
+
+.event-details {
+  h6 {
+    margin-top: 0;
+  }
 }

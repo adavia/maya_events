@@ -9,8 +9,8 @@ body {
   padding-top: 70px;
 }
 
-@media(max-width: 500px) {
-  p { color: red }
+h1, h2, h3 {
+  font-weight: 900;
 }
 
 .navbar-form {
@@ -26,7 +26,6 @@ body {
 }
 
 form {
-  max-width: 500px;
   label {
     font-weight: 600;
   }

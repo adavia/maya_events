@@ -1,11 +1,12 @@
-<%= simple_form_for(event) do |f| %>
-  <%= f.input :title %>
-  <%= f.input :description %>
-  <%= f.input :start_date %>  
-  <%= f.input :end_date %>
-  <%= f.input :location %>
-  <%= f.input :agenda %>
-  <%= f.input :address %>
-  
-  <%= f.button :submit, class: "btn-primary" %>
-<% end %>
+<div class="col-md-6">
+  <%= simple_form_for(event) do |f| %>
+    <%= f.input :title %>
+    <%= f.input :description %>
+    <%= f.input :start_date %>  
+    <%= f.input :end_date %>
+    <%= f.input :location %>
+    <%= f.input :address %>
+    
+    <%= f.button :submit, class: "btn-primary" %>
+  <% end %>
+</div>
