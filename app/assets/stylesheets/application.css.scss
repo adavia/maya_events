@@ -1,0 +1,79 @@
+@import "_variables";
+@import "bootstrap-sprockets";
+@import "bootstrap";
+@import "font-awesome";
+@import "events";
+@import "responsive";
+
+body {
+  padding-top: 70px;
+}
+
+@media(max-width: 500px) {
+  p { color: red }
+}
+
+.navbar-form {
+  padding-top: 2px;
+  .form-control {
+    height: 30px;
+  }
+}
+
+form {
+  max-width: 500px;
+  label {
+    font-weight: 600;
+  }
+}
+
+.alert-notice {
+  @extend .alert-success;
+}
+
+.alert-alert {
+  @extend .alert-danger;
+}
+
+header {
+  @extend .page-header;
+  position: relative;
+  padding-bottom: 0px;
+  &:first-child {
+    margin-top: 20px;
+  }
+}
+
+ul.actions {
+  @extend .list-unstyled;
+  @extend .list-inline;
+}
+
+a.new, a.edit, a.delete {
+  @extend .btn;
+  &:before {
+    font-family: "FontAwesome";
+    padding-right: 0.5em;
+  }
+}
+
+a.new {
+  @extend .btn-success, .btn-sm;
+  &:before {
+    @extend .fa-plus;
+  }
+}
+
+a.edit {
+  @extend .btn-primary, .btn-sm;
+  &:before {
+    @extend .fa-pencil;
+  }
+}
+
+a.delete {
+  @extend .btn-danger, .btn-sm;
+  &:before {
+    @extend .fa-trash;
+  }
+}

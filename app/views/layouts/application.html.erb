@@ -8,16 +8,22 @@
       Riviera Events
     <% end %>
   </title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
   <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
   <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
   <%= csrf_meta_tags %>
 </head>
 <body>
-  <% flash.each do |key, message| %>
-    <div><%= message %></div>
-  <% end %>
+  <%= render "layouts/shared/nav_bar" %>
 
-  <%= yield %>
+  <div class="container">
+    <% flash.each do |key, message| %>
+      <div class="alert alert-<%= key %>">
+        <%= message %>
+      </div>
+    <% end %>
 
+    <%= yield %>
+  </div>
 </body>
 </html>
