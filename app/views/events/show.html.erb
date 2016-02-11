@@ -28,3 +28,11 @@
 </div>
 
 <p><%= @event.description %></p>
+
+<% if @event.tags.any? %>
+  <div id="tags">
+    <ul>Tags:
+      <li><%= render @event.tags %></li>
+    </ul>
+  </div>
+<% end %>

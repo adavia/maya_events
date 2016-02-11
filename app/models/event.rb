@@ -1,5 +1,7 @@
 class Event < ActiveRecord::Base
   belongs_to :organizer, class_name: "User"
+  has_and_belongs_to_many :tags, uniq: true
+  attr_accessor :tag_names
 
   validates :title, presence: true
   validates :title, length: { minimum: 10 }
@@ -17,6 +19,13 @@ class Event < ActiveRecord::Base
   def end_date_cannot_be_minor_than_start_date
     if end_date < start_date
       errors.add(:end_date, "End date can't be minor than start date")
+    end
+  end
+
+  def tag_names=(names)
+    @tag_names = names
+    names.split.each do |name|
+      self.tags << Tag.find_or_initialize_by(name: name)
     end
   end
 end

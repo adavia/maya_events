@@ -96,4 +96,32 @@ RSpec.feature "Organizers can create new events" do
     expect(page).to have_content "Event has not been created."
     expect(page).to have_content "End date can't be minor than start date"
   end
+
+  scenario "with associated tags" do
+    fill_in "Title", with: "Wow this is a new title"
+    fill_in "Description", with: "My pages are ugly!"
+    fill_in "Location", with: "Some location"
+
+    select '2021', from: "event_start_date_1i"
+    select 'January', from: "event_start_date_2i"
+    select '5', from: "event_start_date_3i"
+    select '10', from: "event_start_date_4i"
+    select '30', from: "event_start_date_5i"
+
+    select '2021', from: "event_end_date_1i"
+    select 'February', from: "event_end_date_2i"
+    select '5', from: "event_end_date_3i"
+    select '09', from: "event_end_date_4i"
+    select '30', from: "event_end_date_5i"
+
+    fill_in "Tags", with: "browser visual"
+
+    click_button "Create Event"
+
+    expect(page).to have_content "Event has been created."
+    within("#tags") do
+    expect(page).to have_content "browser"
+    expect(page).to have_content "visual"
+    end
+  end
 end
