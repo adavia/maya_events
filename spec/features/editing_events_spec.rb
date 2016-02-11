@@ -1,11 +1,13 @@
 require "rails_helper"
 
 RSpec.feature "Organizers can edit existing events" do
-  before do
-    FactoryGirl.create(:event, title: "Pool Party")
+  let(:user) { FactoryGirl.create(:user) }
+  let(:event) { FactoryGirl.create(:event, organizer: user) }
 
-    visit "/"
-    click_link "Pool Party"
+  before do
+    login_as(user)
+    
+    visit event_path(event)
     click_link "Edit Event"
   end
 

@@ -1,10 +1,12 @@
 <header>
   <h1>Recent Events</h1>
-  <ul class="actions">
-    <li>
-      <%= link_to "New Event", new_event_path, class: "new" %>
-    </li>
-  </ul>
+  <% if user_signed_in? %>
+    <ul class="actions">
+      <li>
+        <%= link_to "New Event", new_event_path, class: "new" %>
+      </li>
+    </ul>
+  <% end %>
 </header>
 
 <div id="events">

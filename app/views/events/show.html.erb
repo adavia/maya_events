@@ -3,15 +3,17 @@
 <header>
   <h1><%= @event.title %></h1>
   <p>Organized by: <%= @event.organizer %></p>
-  <ul class="actions">
-    <li><%= link_to "Edit Event", edit_event_path(@event),
-      class: "edit" %></li>
-    <li><%= link_to "Delete Event",
-      event_path(@event),
-      method: :delete,
-      data: { confirm: "Are you sure you want to delete this event?" },
-      class: "delete" %></li>
-  </ul>
+  <% if user_signed_in? && @event.organizer.id == current_user.id %>
+    <ul class="actions">
+      <li><%= link_to "Edit Event", edit_event_path(@event),
+        class: "edit" %></li>
+      <li><%= link_to "Delete Event",
+        event_path(@event),
+        method: :delete,
+        data: { confirm: "Are you sure you want to delete this event?" },
+        class: "delete" %></li>
+    </ul>
+  <% end %>
 </header>
 
 <div class="event-details">
