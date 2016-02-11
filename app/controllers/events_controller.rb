@@ -45,6 +45,16 @@ class EventsController < ApplicationController
     redirect_to events_path
   end
 
+  def search
+    if params[:q].present?
+      @events = Event.search(params[:q])
+    else
+      @events = Event.all
+    end
+
+    render "events/index"
+  end
+
   private
     def set_event
       @event = Event.find(params[:id])

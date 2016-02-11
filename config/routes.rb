@@ -7,9 +7,10 @@ Rails.application.routes.draw do
 
   devise_for :users
 
-  resources :events
-
   resources :events do
+    collection do
+      get :search
+    end
     resources :tags, only: [] do
       member do
         delete :remove
