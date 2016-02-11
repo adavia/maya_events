@@ -1,5 +1,8 @@
 <div class="tag">
-  <%= link_to "<span></span>".html_safe, "#", class: "remove",
-    title: "remove" %>
+  <% if user_signed_in? && event.organizer.id == current_user.id %>
+    <%= link_to "<span></span>".html_safe,
+      remove_event_tag_path(event, tag), method: :delete, remote: true,
+      class: "remove", title: "remove" %>
+  <% end %>
   <%= tag.name %>
 </div>

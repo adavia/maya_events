@@ -9,6 +9,14 @@ Rails.application.routes.draw do
 
   resources :events
 
+  resources :events do
+    resources :tags, only: [] do
+      member do
+        delete :remove
+      end
+    end
+  end
+
   # Example of regular route:
   #   get 'products/:id' => 'catalog#view'
 

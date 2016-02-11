@@ -31,8 +31,6 @@
 
 <% if @event.tags.any? %>
   <div id="tags">
-    <ul>Tags:
-      <li><%= render @event.tags %></li>
-    </ul>
+    <%= render @event.tags, event: @event %>
   </div>
 <% end %>

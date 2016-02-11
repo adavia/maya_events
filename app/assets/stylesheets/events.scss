@@ -17,16 +17,14 @@
 .tag {
   @extend .label;
   font-size: 12px;
+  font-weight: 600;
   padding: 0.3em 0.6em;
-  @extend .label-info;
+  @extend .label-primary;
   margin-right: 10px;
   a {
     color: white;
-    a.remove {
-      font-family: "FontAwesome";
-      @extend .fa-close;
-      margin-right: 0.5em;
-      text-decoration: none;
-    }
+    font-family: "FontAwesome";
+    @extend .fa-close;
+    text-decoration: none;  
   }
 }
