@@ -11,6 +11,11 @@ Rails.application.routes.draw do
     collection do
       get :search
     end
+    
+    member do
+      get :join
+    end
+
     resources :tags, only: [] do
       member do
         delete :remove

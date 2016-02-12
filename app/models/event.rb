@@ -3,6 +3,9 @@ class Event < ActiveRecord::Base
   has_and_belongs_to_many :tags, uniq: true
   attr_accessor :tag_names
 
+  has_many :attendances
+  has_many :users, through: :attendances
+
   validates :title, presence: true
   validates :title, length: { minimum: 10 }
   validates :description, presence: true

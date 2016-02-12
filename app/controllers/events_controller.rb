@@ -1,5 +1,5 @@
 class EventsController < ApplicationController
-  before_action :authenticate_user!, only: [:new, :create, :edit, :update, :destroy]
+  before_action :authenticate_user!, only: [:new, :create, :edit, :update, :destroy, :join]
   before_action :set_event, only: [:show, :edit, :update, :destroy]
   before_action :event_owner!, only: [:edit, :update, :destroy]
 
@@ -53,6 +53,16 @@ class EventsController < ApplicationController
     end
 
     render "events/index"
+  end
+
+  def join
+    @attendance = Attendance.join_event(current_user.id,
+      params[:event], "request_sent")
+
+    @attendance.save
+
+    flash[:notice] = "Your request has been sent to join this event."
+    redirect_to event_path(params[:event])
   end
 
   private

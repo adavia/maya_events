@@ -2,7 +2,10 @@
 
 <header>
   <h1><%= @event.title %></h1>
-  <p>Organized by: <%= @event.organizer %></p>
+  <p>Organized by: 
+    <%= image_tag avatar_url(@event.organizer.email), width: 30, class: "img-circle" %> 
+    <%= @event.organizer %>
+  </p>
   <% if user_signed_in? && @event.organizer.id == current_user.id %>
     <ul class="actions">
       <li><%= link_to "Edit Event", edit_event_path(@event),
@@ -34,3 +37,6 @@
     <%= render @event.tags, event: @event %>
   </div>
 <% end %>
+
+<%= link_to "Join event", join_event_path(event: @event.id),
+  class: "btn btn-success btn-sm", role: "button" %>

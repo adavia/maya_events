@@ -14,6 +14,10 @@
   }
 }
 
+#tags {
+  margin-bottom: 20px;
+}
+
 .tag {
   @extend .label;
   font-size: 12px;
