@@ -13,6 +13,8 @@ class Event < ActiveRecord::Base
   validate :start_date_cannot_be_minor_than_today
   validate :end_date_cannot_be_minor_than_start_date
 
+  default_scope { order(created_at: :desc) }
+
   def start_date_cannot_be_minor_than_today
     if start_date < Time.now
       errors.add(:start_date, "Start date can't be minor than current date")

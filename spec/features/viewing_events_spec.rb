@@ -8,11 +8,16 @@ RSpec.feature "Users can view events" do
 
   before do
     login_as(user)
-    visit "/"
+    visit "/" 
   end
 
-  scenario "with the event details" do  
+  scenario "with the event details" do
     click_link "Pool Party in forest"
     expect(page.current_url).to eq event_url(event)
+  end
+
+  scenario "created themselves" do
+    click_link "My events"
+    expect(page).to have_content "Pool Party in forest"
   end
 end

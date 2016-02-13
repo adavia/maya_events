@@ -60,6 +60,12 @@ class EventsController < ApplicationController
     render "events/index"
   end
 
+  def my_events
+    @events = current_user.organized_events
+
+    render "events/index"
+  end
+
   def join
     @attendance = Attendance.join_event(current_user.id,
       params[:id], "request_sent")
