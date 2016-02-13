@@ -33,6 +33,6 @@ class Event < ActiveRecord::Base
   end
 
   def self.search(name)
-    Tag.find_by_name!(name).events
+    Tag.where("name like ?", "%#{name}%").first.events
   end
 end
