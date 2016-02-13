@@ -25,14 +25,14 @@ class Event < ActiveRecord::Base
     end
   end
 
-  def self.search(name)
-    Tag.find_by_name!(name).events
-  end
-
   def tag_names=(names)
     @tag_names = names
     names.split.each do |name|
       self.tags << Tag.find_or_initialize_by(name: name)
     end
+  end
+
+  def self.search(name)
+    Tag.find_by_name!(name).events
   end
 end

@@ -20,6 +20,8 @@ gem 'coffee-rails', '~> 4.1.0'
 gem 'devise', '~> 3.4.1'
 # Access control
 gem 'pundit', '~> 0.3.0'
+# Use state machine - worflow
+gem 'workflow'
 # Upload files
 gem 'carrierwave'
 # See https://github.com/rails/execjs#readme for more supported runtimes

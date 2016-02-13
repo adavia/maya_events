@@ -1,7 +1,12 @@
 class EventsController < ApplicationController
-  before_action :authenticate_user!, only: [:new, :create, :edit, :update, :destroy, :join]
-  before_action :set_event, only: [:show, :edit, :update, :destroy]
-  before_action :event_owner!, only: [:edit, :update, :destroy]
+  before_action :authenticate_user!, only: [:new, :create, :edit, 
+    :update, :destroy, :join, :accept_request, :reject_request]
+
+  before_action :set_event, only: [:show, :edit, :update, :destroy,
+    :join, :accept_request, :reject_request]
+
+  before_action :event_owner!, only: [:edit, :update, :destroy,
+    :accept_request, :reject_request]
 
   def index
     @events = Event.all
@@ -57,12 +62,32 @@ class EventsController < ApplicationController
 
   def join
     @attendance = Attendance.join_event(current_user.id,
-      params[:event], "request_sent")
+      params[:id], "request_sent")
 
     @attendance.save
 
     flash[:notice] = "Your request has been sent to join this event."
-    redirect_to event_path(params[:event])
+    redirect_to @event
+  end
+
+  def accept_request
+    @attendance = Attendance.find(params[:attendance_id]) rescue nil
+    @attendance.accept!
+
+    @attendance.save
+
+    flash[:notice] = "User accepted to join event."
+    redirect_to @event
+  end
+
+  def reject_request
+    @attendance = Attendance.find(params[:attendance_id]) rescue nil
+    @attendance.reject!
+
+    @attendance.save
+
+    flash[:notice] = "User rejected to join event."
+    redirect_to @event
   end
 
   private
@@ -71,15 +96,15 @@ class EventsController < ApplicationController
       rescue ActiveRecord::RecordNotFound
 
       flash[:alert] = "The event you were looking for could not be found."
-      redirect_to events_path
+      redirect_to root_path
     end
 
     def event_owner!
       authenticate_user!
 
       if @event.organizer.id != current_user.id
+        flash[:alert] = "You do not have enough permissions to do this."
         redirect_to @event
-        flash[:alert] = "You do not have enough permissions to do this"
       end
     end
 

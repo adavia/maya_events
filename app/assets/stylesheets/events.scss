@@ -36,3 +36,20 @@
     text-decoration: none;
   }
 }
+
+.event-requests {
+  @extend .list-unstyled;
+  width: 80%;
+  li {
+    margin-bottom: 10px;
+  }
+  span.request-buttons {
+    float: right;
+  }
+}
+
+.panel-requests {
+  @extend .panel;
+  @extend .panel-default;
+  margin-top: 20px;
+}

@@ -16,12 +16,22 @@ Rails.application.routes.draw do
       get :join
     end
 
+    member do
+      get "accept_request/:attendance_id", action: :accept_request, as: :accept_request
+    end
+
+    member do
+      get "reject_request/:attendance_id", action: :reject_request, as: :reject_request
+    end
+
     resources :tags, only: [] do
       member do
         delete :remove
       end
     end
   end
+
+  resources :attendances, only: [:destroy]
 
   # Example of regular route:
   #   get 'products/:id' => 'catalog#view'
