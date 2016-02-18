@@ -13,6 +13,7 @@ class EventsController < ApplicationController
   end
 
   def show
+    @request = @event.attendances.cancel(current_user.id).first
   end
 
   def new
@@ -22,12 +23,20 @@ class EventsController < ApplicationController
   def create
     @event = current_user.organized_events.build(event_params)
 
-    if @event.save
-      flash[:notice] = "Event has been created."
-      redirect_to @event
-    else
-      flash.now[:alert] = "Event has not been created."
-      render "new"
+    respond_to do |format|
+      if @event.save
+        format.html { 
+          flash[:notice] = "Event has been created."
+          redirect_to @event 
+        }
+        format.json { render json: @event, status: :created, location: @event }
+      else
+        format.html { 
+          flash.now[:alert] = "Event has not been created."
+          render action: "new"
+        }
+        format.json { render json: @event.errors, status: :unprocessable_entity }
+      end
     end
   end
 
@@ -35,12 +44,20 @@ class EventsController < ApplicationController
   end
 
   def update
-    if @event.update(event_params)
-      flash[:notice] = "Event has been updated."
-      redirect_to @event
-    else
-      flash.now[:alert] = "Event has not been updated."
-      render "edit"
+    respond_to do |format|
+      if @event.update(event_params)
+        format.html { 
+          flash[:notice] = "Event has been updated."
+          redirect_to @event 
+        }
+        format.json { render json: @event, status: :created, location: @event }
+      else
+        format.html { 
+          flash.now[:alert] = "Event has not been updated."
+          render action: "edit"
+        }
+        format.json { render json: @event.errors, status: :unprocessable_entity }
+      end
     end
   end
 
@@ -72,8 +89,12 @@ class EventsController < ApplicationController
 
     @attendance.save
 
-    flash[:notice] = "Your request has been sent to join this event."
-    redirect_to @event
+    if !request.xhr?
+      flash[:notice] = "Your request has been sent to join this event."
+      redirect_to @event
+    else
+      render partial: "events/request", locals: { request: @attendance }
+    end
   end
 
   def accept_request
@@ -82,8 +103,12 @@ class EventsController < ApplicationController
 
     @attendance.save
 
-    flash[:notice] = "User accepted to join event."
-    redirect_to @event
+    if !request.xhr?
+      flash[:notice] = "User accepted to join event."
+      redirect_to @event
+    else
+      render layout: false
+    end
   end
 
   def reject_request
@@ -92,8 +117,12 @@ class EventsController < ApplicationController
 
     @attendance.save
 
-    flash[:notice] = "User rejected to join event."
-    redirect_to @event
+    if !request.xhr?
+      flash[:notice] = "User rejected to join event."
+      redirect_to @event
+    else
+      render layout: false
+    end
   end
 
   private

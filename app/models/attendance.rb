@@ -8,6 +8,9 @@ class Attendance < ActiveRecord::Base
   scope :accepted, -> { where(state: "accepted") }
   scope :rejected, -> { where(state: "rejected") }
 
+  scope :cancel, -> (user) { where(state: ["request_sent", "accepted", "rejected"])
+    .where(user: user) }
+
   include Workflow
 
   workflow_column :state

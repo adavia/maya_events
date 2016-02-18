@@ -13,7 +13,7 @@
   <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
   <%= csrf_meta_tags %>
 </head>
-<body>
+<%= content_tag :body, class: "#{controller_name} #{action_name}" do %>
   <%= render "layouts/shared/nav_bar" %>
 
   <div class="container">
@@ -25,5 +25,5 @@
 
     <%= yield %>
   </div>
-</body>
+<% end %>
 </html>

@@ -1,4 +1,6 @@
 class AttendancesController < ApplicationController
+  before_action :set_event
+
   before_action :authenticate_user!, only: [:destroy]
 
   before_action :set_attendance, only: [:destroy]
@@ -7,11 +9,19 @@ class AttendancesController < ApplicationController
 
   def destroy
     @attendance.destroy
-    flash[:notice] = "You have been removed from the event."
-    redirect_to @attendance.event
+    if !request.xhr?
+      flash[:notice] = "You have been removed from the event."
+      redirect_to @attendance.event
+    else
+      render partial: "events/request", locals: { request: nil, event: @event }
+    end
   end
 
   private
+    def set_event
+      @event = Event.find(params[:event_id])
+    end
+
     def set_attendance
       @attendance = Attendance.find(params[:id])
       rescue ActiveRecord::RecordNotFound

@@ -3,13 +3,14 @@ require 'rails_helper'
 RSpec.describe AttendancesController, type: :controller do
   let(:user) { FactoryGirl.create(:user) }
   let(:user_2) { FactoryGirl.create(:user, email: "something@hotmail.com") }
+  let(:event) { FactoryGirl.create(:event) }
 
   before :each do
     sign_in user
   end
 
   it "handles a missing attendance correctly" do
-    post :destroy, id: "not-here"
+    post :destroy, event_id: event, id: "not-here"
 
     expect(response).to redirect_to(root_path)
 
@@ -23,7 +24,7 @@ RSpec.describe AttendancesController, type: :controller do
 
     attendance = FactoryGirl.create(:attendance, user: user_2, event: event)
 
-    post :destroy, id: attendance
+    post :destroy, event_id: event, id: attendance
     
     expect(response).to redirect_to(event)
     message = "You do not have enough permissions to do this."

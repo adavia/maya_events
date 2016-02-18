@@ -5,7 +5,10 @@ Rails.application.routes.draw do
   # You can have the root of your site routed with "root"
   root "events#index"
 
-  devise_for :users
+  devise_for :users, controllers: { 
+    registrations: "registrations",
+    sessions: "sessions"
+  }
 
   resources :events do
     collection do
@@ -28,14 +31,14 @@ Rails.application.routes.draw do
       get "reject_request/:attendance_id", action: :reject_request, as: :reject_request
     end
 
+    resources :attendances, only: [:destroy]
+
     resources :tags, only: [] do
       member do
         delete :remove
       end
     end
   end
-
-  resources :attendances, only: [:destroy]
 
   # Example of regular route:
   #   get 'products/:id' => 'catalog#view'

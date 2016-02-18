@@ -81,3 +81,8 @@ a.delete {
     @extend .fa-trash;
   }
 }
+
+.auth-links {
+  @extend .list-unstyled;
+  margin-top: 10px;
+}

@@ -1,0 +1,11 @@
+<% if request.present? %>
+  <%= link_to "Cancel joined request", 
+    [request.event, request],
+    data: { remote: true, type: "html", method: :delete, behavior: "btn-state-request" },
+    class: "btn btn-danger btn-sm", role: "button" %>
+<% else %>
+  <%= link_to "Join event",
+    join_event_path(event),
+    data: { remote: true, type: "html", behavior: "btn-state-request" },
+    class: "btn btn-success btn-sm", role: "button" %>
+<% end %>
