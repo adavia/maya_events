@@ -16,7 +16,7 @@ RSpec.feature "Users can join events" do
     click_link "Join event"
     expect(page).to have_content "Your request has been sent to join this event."
     expect(page).to have_content "Cancel joined request"
-    within(:css, "ul.event-requests", match: :first) do
+    within(:css, "ul#pending-request", match: :first) do
       expect(page).to have_content user.email
     end
   end

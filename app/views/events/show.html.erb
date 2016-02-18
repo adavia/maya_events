@@ -46,31 +46,26 @@
       </div>
     <% end %>
   </div>
-  <div class="col-md-6">
+  <div class="col-md-6"> 
     <div class="panel-requests">
-      <div class="panel-body">
-        <% if user_signed_in? && @event.organizer.id == current_user.id %>
-          <h5>Pending Requests</h5>
-          <ul class="event-requests">
-            <% if @event.attendances.pending.any? %>
-              <%= render @event.attendances.pending, event: @event %>
-            <% else %>
-              <li>No pending requests for this event</li>
-            <% end %>
-          </ul>
-        <% end %>
-        <h5>Attendees</h5>
-        <ul class="event-requests">
-          <% if @event.attendances.accepted.each do |a|%>
-            <li>
-              <%= image_tag avatar_url(a.user.email), width: 30, class: "img-circle" %>
-              <%= a.user.email %>
-            </li>
-          <% end.empty? %>
-            <li>No attendees for this event</li>
+      <% if user_signed_in? && @event.organizer.id == current_user.id %>
+        <h5>Pending Requests</h5>
+        <ul id="pending-request" class="request-list">
+          <% if @event.attendances.pending.any? %>
+            <%= render @event.attendances.pending, event: @event %>
+          <% else %>
+            <li>No pending requests for this event</li>
           <% end %>
         </ul>
-      </div>
-    </div>
+      <% end %>
+      <h5>Attendees</h5>
+      <ul id="accepted-request" class="request-list">
+        <% if @event.attendances.accepted.any? %>
+          <%= render @event.attendances.accepted, event: @event %>
+        <% else %>
+          <li>No attendees for this event</li>
+        <% end %>
+      </ul>
+    </div>   
   </div>
 </div>

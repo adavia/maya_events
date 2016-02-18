@@ -107,7 +107,7 @@ class EventsController < ApplicationController
       flash[:notice] = "User accepted to join event."
       redirect_to @event
     else
-      render layout: false
+      render @attendance, request: @attendance
     end
   end
 
@@ -121,7 +121,7 @@ class EventsController < ApplicationController
       flash[:notice] = "User rejected to join event."
       redirect_to @event
     else
-      render layout: false
+      render @attendance, request: @attendance
     end
   end
 

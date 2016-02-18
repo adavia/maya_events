@@ -1,10 +1,16 @@
 <li>
   <%= image_tag avatar_url(attendance.user.email), width: 30, class: "img-circle" %>
   <%= attendance.user.email%>
-  <span class="request-buttons">
-    <%= link_to "Accept", accept_request_event_path(@event.id, attendance.id),
-      class: "btn btn-success btn-xs" %>
-    <%= link_to "Reject", reject_request_event_path(@event.id, attendance.id),
-      class: "btn btn-danger btn-xs" %>
-  </span>
+  <% if attendance.state == "request_sent" %>
+    <span class="request-buttons">
+      <%= link_to "Accept", 
+        accept_request_event_path(@event.id, attendance.id),
+        data: { remote: true, behavior: "btn-accept-request" },
+        class: "btn btn-success btn-xs" %>
+      <%= link_to "Reject", 
+        reject_request_event_path(@event.id, attendance.id),
+        data: { remote: true, behavior: "btn-reject-request" },
+        class: "btn btn-danger btn-xs" %>
+    </span>
+  <% end %>
 </li>

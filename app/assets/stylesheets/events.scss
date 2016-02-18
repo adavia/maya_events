@@ -37,7 +37,7 @@
   }
 }
 
-.event-requests {
+.request-list {
   @extend .list-unstyled;
   width: 80%;
   li {
@@ -51,5 +51,6 @@
 .panel-requests {
   @extend .panel;
   @extend .panel-default;
+  @extend .panel-body;
   margin-top: 20px;
 }

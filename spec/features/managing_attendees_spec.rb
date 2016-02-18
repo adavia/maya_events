@@ -16,7 +16,7 @@ RSpec.feature "Organizers can manage user requests" do
   scenario "to accept users" do  
     click_link "Accept"
     expect(page).to have_content "User accepted to join event."
-    within all("ul.event-requests").first do
+    within all("ul#pending-request").first do
       expect(page).to_not have_content user.email
     end
   end
@@ -24,7 +24,7 @@ RSpec.feature "Organizers can manage user requests" do
   scenario "to reject users" do
     click_link "Reject"
     expect(page).to have_content "User rejected to join event."
-    within all("ul.event-requests").last do
+    within all("ul#accepted-request").last do
       expect(page).to_not have_content user.email
     end
   end
