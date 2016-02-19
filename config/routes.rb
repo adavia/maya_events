@@ -18,6 +18,10 @@ Rails.application.routes.draw do
     collection do
       get :my_events
     end
+
+    collection do
+      get :calendar
+    end
     
     member do
       get :join

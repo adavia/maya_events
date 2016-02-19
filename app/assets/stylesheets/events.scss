@@ -54,3 +54,20 @@
   @extend .panel-body;
   margin-top: 20px;
 }
+
+.calendar-links {
+  margin-bottom: 20px;
+}
+
+.calendar-table {
+  @extend .table;
+  @extend .table-hover;
+  tbody {
+    td {
+      max-width: 120px;
+      h5 {
+        margin-bottom: 0px;
+      }
+    }
+  }
+}

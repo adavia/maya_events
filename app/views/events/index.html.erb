@@ -3,6 +3,9 @@
   <% if user_signed_in? %>
     <ul class="actions">
       <li>
+        <%= link_to "Show calendar", calendar_events_path, class: "btn btn-primary btn-sm" %>
+      </li>
+      <li>
         <%= link_to "New Event", new_event_path, class: "new" %>
       </li>
     </ul>

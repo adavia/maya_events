@@ -1,6 +1,6 @@
 class EventsController < ApplicationController
   before_action :authenticate_user!, only: [:new, :create, :edit, 
-    :update, :destroy, :join, :accept_request, :reject_request]
+    :update, :destroy, :my_events, :calendar, :join, :accept_request, :reject_request]
 
   before_action :set_event, only: [:show, :edit, :update, :destroy,
     :join, :accept_request, :reject_request]
@@ -81,6 +81,10 @@ class EventsController < ApplicationController
     @events = current_user.organized_events
 
     render "events/index"
+  end
+
+  def calendar
+    @events = current_user.organized_events
   end
 
   def join
