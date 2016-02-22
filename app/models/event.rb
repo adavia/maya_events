@@ -13,6 +13,9 @@ class Event < ActiveRecord::Base
   validate :start_date_cannot_be_minor_than_today
   validate :end_date_cannot_be_minor_than_start_date
 
+  geocoded_by :location
+  after_validation :geocode, :if => :location_changed?
+
   default_scope { order(created_at: :desc) }
 
   def start_date_cannot_be_minor_than_today

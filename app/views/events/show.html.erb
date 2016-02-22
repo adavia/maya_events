@@ -34,7 +34,7 @@
 
 <% if @event.tags.any? %>
   <div id="tags">
-    <%= render @event.tags, event: @event %>
+    <small>Tags: </small><%= render @event.tags, event: @event %>
   </div>
 <% end %>
 
@@ -45,6 +45,7 @@
         <%= render partial: "request", locals: { request: @request, event: @event } %>
       </div>
     <% end %>
+    <%= image_tag "http://maps.google.com/maps/api/staticmap?size=450x300&sensor=false&zoom=16&markers=#{@event.latitude}%2C#{@event.longitude}", class: "img-thumbnail img-responsive" %>
   </div>
   <div class="col-md-6"> 
     <div class="panel-requests">

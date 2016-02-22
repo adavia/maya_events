@@ -13,7 +13,9 @@ class EventsController < ApplicationController
   end
 
   def show
-    @request = @event.attendances.cancel(current_user.id).first
+    if current_user
+      @request = @event.attendances.cancel(current_user.id).first
+    end
   end
 
   def new
