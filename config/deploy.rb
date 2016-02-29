@@ -8,7 +8,7 @@ set :repo_url, 'git@github.com:adavia/maya_events.git'
 # ask :branch, `git rev-parse --abbrev-ref HEAD`.chomp
 
 # Default deploy_to directory is /var/www/my_app_name
-set :deploy_to, '/home/deploy/maya_events'
+set :deploy_to, '/home/adavia/maya_events'
 
 # Default value for :scm is :git
 # set :scm, :git
